@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boomeshwara KS - Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="r.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -23,7 +23,7 @@
             <span>S</span>
         </div>
 
-
+<!-- 
         <nav>
             <div class="logo glow-on-hover">BOOMESHWARA KS</div>
             <ul>
@@ -32,6 +32,45 @@
                 <li><a href="#skills" class="glow-on-hover">Skills</a></li>
                 <li><a href="#project" class="glow-on-hover">Projects</a></li>
                 <li><a href="#contact" class="glow-on-hover">Contact</a></li>
+            </ul>
+        </nav> -->
+
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>BoomeshKS</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="#home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#about">
+                        <i class="fas fa-user"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#skills">
+                        <i class="fas fa-tools"></i>
+                        <span>Skills</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#project">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 
@@ -221,7 +260,6 @@
         <script type="module" src="main.js"></script>
 
         <script>
-            // Background animation
             function createCubes() {
                 const background = document.createElement('div');
                 background.className = 'background-animation';
@@ -237,62 +275,69 @@
                 }
             }
 
-            // Loading animation
             function createLoadingScreen() {
-                const loadingScreen = document.createElement('div');
-                loadingScreen.className = 'loading-screen';
-                
-                const loadingText = document.createElement('div');
-                loadingText.className = 'loading-text';
-                
-                const text = 'BoomeshKS';
-                text.split('').forEach((letter, index) => {
-                    const span = document.createElement('span');
-                    span.textContent = letter;
-                    span.style.animationDelay = `${index * 0.1}s`;
-                    loadingText.appendChild(span);
-                });
-                
-                loadingScreen.appendChild(loadingText);
-                document.body.appendChild(loadingScreen);
-                
-                setTimeout(() => {
-                    loadingScreen.classList.add('fade-out');
-                    setTimeout(() => {
-                        loadingScreen.remove();
-                    }, 1000);
-                }, 2000);
+              const loadingScreen = document.createElement('div');
+              loadingScreen.className = 'loading-screen';
+
+              const loadingText = document.createElement('div');
+              loadingText.className = 'loading-text';
+
+              const text = 'BoomeshKS';
+              text.split('').forEach((letter, index) => {
+                  const span = document.createElement('span');
+                  span.textContent = letter;
+                  span.style.animationDelay = `${index * 0.1}s`;
+                  loadingText.appendChild(span);
+              });
+
+              loadingScreen.appendChild(loadingText);
+              document.body.appendChild(loadingScreen);
+
+              setTimeout(() => {
+                  loadingScreen.classList.add('fade-out');
+                  setTimeout(() => {
+                      loadingScreen.remove();
+                  }, 1000);
+              }, 2000);
             }
 
-            // Initialize everything
+
             document.addEventListener('DOMContentLoaded', () => {
-                createLoadingScreen();
-                createCubes();
-                
-                // Existing intersection observer code
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                        }
-                    });
-                }, { threshold: 0.1 });
+              createLoadingScreen();
 
-                document.querySelectorAll('section').forEach((section) => {
-                    observer.observe(section);
-                });
+              createCubes();
 
-                document.querySelector('.hero').classList.add('active');
+              setTimeout(() => {
+                  const observer = new IntersectionObserver((entries) => {
+                      entries.forEach(entry => {
+                          if (entry.isIntersecting) {
+                              entry.target.classList.add('active');
 
-                document.querySelectorAll('nav a').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const targetId = link.getAttribute('href');
-                        const targetSection = document.querySelector(targetId);
-                        targetSection.scrollIntoView({ behavior: 'smooth' });
-                    });
-                });
+                              const childElements = entry.target.querySelectorAll('.education-item, .skill-box, .project-item, .experience-item');
+                              childElements.forEach((child, index) => {
+                                  setTimeout(() => {
+                                      child.classList.add('active');
+                                  }, index * 200); // Staggered delay
+                              });
+                          }
+                      });
+                  }, { threshold: 0.1 });
+
+                  document.querySelectorAll('section, .skills-container, .education-grid, .experience-grid, .projects-grid').forEach((section) => {
+                      observer.observe(section);
+                  });
+
+                  document.querySelectorAll('nav a').forEach(link => {
+                      link.addEventListener('click', (e) => {
+                          e.preventDefault();
+                          const targetId = link.getAttribute('href');
+                          const targetSection = document.querySelector(targetId);
+                          targetSection.scrollIntoView({ behavior: 'smooth' });
+                      });
+                  });
+              }, 3000); 
             });
+
         </script>
     </div>
 </body>
